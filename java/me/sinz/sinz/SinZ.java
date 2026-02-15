@@ -12,10 +12,9 @@ import android.view.WindowInsets;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.ContentFrameLayout;
-import androidx.appcompat.widget.FitWindowsLinearLayout;
 import androidx.appcompat.widget.Toolbar;
 
 public class SinZ {
@@ -73,6 +72,20 @@ public class SinZ {
                     return WindowInsets.CONSUMED;
                 }
             });
+    }
+
+    public static Toast toast(Context ctx, String msg) {
+        Toast toast = new Toast(ctx);
+        TextView txt = new TextView(ctx);
+        txt.setText(msg);
+        txt.setTextSize(13);
+        txt.setTextColor(Color.WHITE);
+        txt.setBackgroundColor(Color.parseColor("#BD424242"));
+        int pad = dip2px(ctx, 8);
+        txt.setPadding(pad, pad, pad, pad);
+        toast.setView(txt);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        return toast;
     }
 
     public static int dip2px(Context ctx, int dips) {

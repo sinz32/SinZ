@@ -3,6 +3,7 @@ package me.sinz.sinz;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.ArrayAdapter;
@@ -25,7 +26,14 @@ public class MainActivity extends AppCompatActivity {
         ListView list = new ListView(this);
         list.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, menus));
         list.setOnItemClickListener((adapterView, view, pos, id) -> {
+            switch ((int)id) {
+                case 0:
+                    startService(new Intent(this, MainService.class));
+                    break;
+                case 1:
 
+                    break;
+            }
         });
         int pad = SinZ.dip2px(this, 16);
         list.setPadding(pad, pad, pad, pad);
