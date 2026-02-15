@@ -31,6 +31,15 @@ public class MainActivity extends AppCompatActivity {
                     startService(new Intent(this, MainService.class));
                     break;
                 case 1:
+                    startActivity(new Intent(this, MetroActivity.class));
+                    break;
+                case 2:
+//                    startActivity(new Intent(this, TrainCardActivity.class));
+                    break;
+                case 3:
+//                    startActivity(new Intent(this, GFriendActivity.class));
+                    break;
+                case 4:
 
                     break;
             }

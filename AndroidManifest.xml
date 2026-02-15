@@ -12,8 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SinZ">
-        <activity
-            android:name=".MainActivity"
+        <activity android:name=".MainActivity"
+            android:resizeableActivity="true"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +22,11 @@
             </intent-filter>
         </activity>
         <service android:name=".MainService" />
+
+        <activity android:name=".MetroActivity"
+            android:resizeableActivity="true"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout"
+            android:label="SinZ Metro"/>
     </application>
 
 </manifest>

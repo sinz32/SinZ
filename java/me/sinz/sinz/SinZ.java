@@ -16,10 +16,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 public class SinZ {
 
     public static final String THIS_YEAR = "2026";
+    public static final String VERSION = "1.0";
 
     public static Toolbar createTitle(AppCompatActivity ctx, String txt) {
         Toolbar title = new Toolbar(ctx);
@@ -32,6 +34,42 @@ public class SinZ {
         title.setElevation(dip2px(ctx, 5));
         ctx.setSupportActionBar(title);
         return title;
+    }
+
+    public static LinearLayout createDrawer(Context ctx, String txt) {
+        return createDrawer(ctx, txt, Gravity.LEFT);
+    }
+
+    public static LinearLayout createDrawer(Context ctx, String txt, int gravity) {
+        LinearLayout layout = new LinearLayout(ctx);
+        layout.setOrientation(1);
+
+        int pad = dip2px(ctx, 16);
+
+        TextView title = new TextView(ctx);
+        title.setText(txt);
+        title.setTextSize(23);
+        title.setTextColor(Color.WHITE);
+        title.setBackgroundColor(Color.BLACK);
+        title.setPadding(pad, dip2px(ctx, 32), pad, dip2px(ctx, 4));
+        title.setGravity(Gravity.CENTER);
+        layout.addView(title);
+
+        TextView cr = new TextView(ctx);
+        cr.setText("ⓒ 2016-" + THIS_YEAR + " SinZ, All rights reserved.");
+        cr.setTextSize(12);
+        cr.setTextColor(Color.WHITE);
+        cr.setBackgroundColor(Color.BLACK);
+        cr.setPadding(pad, dip2px(ctx, 4), pad, pad);
+        cr.setGravity(Gravity.CENTER);
+        layout.addView(cr);
+
+        DrawerLayout.LayoutParams params = new DrawerLayout.LayoutParams(-1, -1);
+        params.gravity = gravity;
+        layout.setLayoutParams(params);
+        layout.setBackgroundColor(Color.WHITE);
+
+        return layout;
     }
 
     public static TextView copyright(Context ctx) {
@@ -68,7 +106,13 @@ public class SinZ {
                     rootView.setPadding(sb.left, rootView.getPaddingTop(), sb.right, sb.bottom);
 
                     //상단 여백만 설정 - 위에서 여백 설정했던 view의 자식 view
-                    contentView.setPadding(contentView.getPaddingLeft(), sb.top, contentView.getPaddingRight(), contentView.getPaddingBottom());
+//                    contentView.setPadding(contentView.getPaddingLeft(), sb.top, contentView.getPaddingRight(), contentView.getPaddingBottom());
+                    //padding으로 넣으면 drawer 사용시 디자인 개판남. margin으로 바꾸니 아주 잘 됨
+                    //또는 drawer 안에 있는 view들에 각각 padding 설정 필요
+                    ViewGroup.MarginLayoutParams margin = (ViewGroup.MarginLayoutParams) contentView.getLayoutParams();
+                    margin.setMargins(0, sb.top, 0, 0);
+                    contentView.setLayoutParams(margin);
+
                     return WindowInsets.CONSUMED;
                 }
             });
