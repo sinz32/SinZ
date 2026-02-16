@@ -16,10 +16,8 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 
@@ -34,7 +32,7 @@ public class MetroActivity extends AppCompatActivity {
     //깃허브에 올릴 예정이라
     //url을   봇이   못하도록   자른
     //크롤링   찾지   의도적으로   것
-    public final String METRO_URL = "http"+"s://met"+"ro.sin"+"z.me";
+    private final String METRO_URL = "htt"+"ps://met"+"ro.sin"+"z.me";
 
     private DrawerLayout drawer;
     private Toolbar title;
