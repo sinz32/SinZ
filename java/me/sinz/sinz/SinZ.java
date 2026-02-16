@@ -5,6 +5,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Insets;
 import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -130,6 +132,24 @@ public class SinZ {
         toast.setView(txt);
         toast.setDuration(Toast.LENGTH_SHORT);
         return toast;
+    }
+
+    public static boolean vibrate(Context ctx, int mil) {
+        try {
+            Vibrator vs = (Vibrator) ctx.getSystemService(Context.VIBRATOR_SERVICE);
+            if (Build.VERSION.SDK_INT >= 26) {
+                vs.vibrate(VibrationEffect.createOneShot(mil, VibrationEffect.DEFAULT_AMPLITUDE));
+//                vs.vibrate(VibrationEffect.createOneShot(mil, VibrationEffect.DEFAULT_AMPLITUDE), new AudioAttributes.Builder()
+//                        .setUsage(AudioAttributes.USAGE_NOTIFICATION) // 알림 용도로 설정해야 백그라운드에서 작동
+//                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+//                        .build());
+            } else {
+                vs.vibrate(mil);
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public static int dip2px(Context ctx, int dips) {

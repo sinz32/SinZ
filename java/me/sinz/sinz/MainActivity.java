@@ -5,6 +5,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Gravity;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
@@ -13,6 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         list.setOnItemClickListener((adapterView, view, pos, id) -> {
             switch ((int)id) {
                 case 0:
-                    startService(new Intent(this, MainService.class));
+                    startActivity(new Intent(this, InputActivity.class));
                     break;
                 case 1:
                     startActivity(new Intent(this, MetroActivity.class));

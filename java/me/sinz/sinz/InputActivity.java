@@ -1,39 +1,51 @@
 package me.sinz.sinz;
 
-import android.app.Service;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.IBinder;
+import android.os.Handler;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.view.WindowManager;
+import android.webkit.WebView;
+import android.widget.LinearLayout;
 
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class MainService extends Service {
+public class InputActivity extends AppCompatActivity {
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        WebView web = new WebView(this);
+        web.loadUrl("file:///android_asset/listening.html");
+        web.setLayoutParams(new LinearLayout.LayoutParams(-1, -1));
+        web.setBackgroundColor(Color.argb(90, 0, 0, 0));
+        setContentView(web);
         voiceInput();
-        return START_NOT_STICKY;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
     }
 
     private void procCmd(String input) {
-        String cmd = input.split(" ")[0];
-        String data = input.replaceFirst(cmd + " ", "");
-
+        String[] cmd = input.split(" ");
+        String data = input.replaceFirst(cmd[0] + " ", "");
+        
+        new Handler().postDelayed(()->finish(), 1000);
     }
 
     private void voiceInput() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, this.getPackageName());
+        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR");
         final SpeechRecognizer stt = SpeechRecognizer.createSpeechRecognizer(this);
         stt.setRecognitionListener(new RecognitionListener() {
             @Override
             public void onReadyForSpeech(Bundle params) {
+                SinZ.vibrate(InputActivity.this, 100);
             }
 
             @Override
@@ -54,35 +66,36 @@ public class MainService extends Service {
 
             @Override
             public void onError(int error) {
+                SinZ.vibrate(InputActivity.this, 100);
                 toast("Error: code " + error);
                 stt.destroy();
+                new Handler().postDelayed(()->finish(), 1000);
             }
 
             @Override
             public void onResults(Bundle results) {
+                SinZ.vibrate(InputActivity.this, 100);
                 final ArrayList<String> result = (ArrayList<String>) results.get(SpeechRecognizer.RESULTS_RECOGNITION);
                 final String input = result.get(0);
                 stt.destroy();
+                procCmd(input);
                 toast(input);
             }
 
             @Override
-            public void onPartialResults(Bundle partialResults) {}
+            public void onPartialResults(Bundle partialResults) {
+            }
 
             @Override
-            public void onEvent(int eventType, Bundle params) {}
+            public void onEvent(int eventType, Bundle params) {
+            }
 
         });
         stt.startListening(intent);
     }
 
-    private void toast(String msg) {
-        SinZ.toast(this, msg).show();
+    private void toast(final String msg) {
+        runOnUiThread(() -> SinZ.toast(this, msg).show());
     }
 
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
 }
