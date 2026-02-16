@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Input Circle Backrgound</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .circle-bg-fixed {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .circle-ui {
+            position: relative;
+            width: 85vw; height: 85vw;
+            max-width: 450px; max-height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.95;
+        }
+
+        .ring {
+            position: absolute;
+            border-radius: 50%;
+            transform-origin: center;
+            border: 4px solid #FFFFFF;
+            background: transparent;
+            filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.15));
+            box-sizing: border-box;
+        }
+
+        .ring-1 {
+            width: 80%; height: 80%;
+            border-style: dashed;
+            animation: rotate-cw 50s linear infinite;
+        }
+
+        .ring-2 {
+            width: 72%; height: 72%;
+            border-style: dashed;
+            animation: rotate-ccw 50s linear infinite;
+        }
+
+        .ring-3 {
+            width: 60%; height: 60%;
+            border: 8px solid #FFFFFF;
+            opacity: 0.7;
+        }
+
+        .ring-4 {
+            width: 48%; height: 48%;
+            border: 8px solid #FFFFFF;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            animation: rotate-ccw 1.6s ease-in-out infinite;
+        }
+
+        .ring-5 {
+            width: 34%; height: 34%;
+            border: 8px solid #FFFFFF;
+            border-bottom-color: transparent;
+            border-left-color: transparent; 
+            border-right-color: transparent;
+            animation: rotate-cw 1.6s linear infinite;
+        }
+
+        .core-static {
+            width: 18px; height: 18px;
+            background-color: #FFFFFF;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #FFFFFF, 0 0 30px rgba(255, 255, 255, 0.8);
+            animation: core-pulse 2s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        @keyframes rotate-cw {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes rotate-ccw {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        @keyframes core-pulse { 
+            0%, 100% { transform: scale(1); } 
+            50% { transform: scale(1.4); } 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="circle-bg-fixed">
+        <div class="circle-ui">
+            <div class="ring ring-1"></div>
+            <div class="ring ring-2"></div>
+            <div class="ring ring-3"></div>
+            <div class="ring ring-4"></div>
+            <div class="ring ring-5"></div>
+            <div class="core-static"></div>
+        </div>
+    </div>
+
+</body>
+</html>
