@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="voice_input"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_voice_input"
+        android:shortcutLongLabel="@string/shortcut_voice_input"
+        android:shortcutDisabledMessage="@string/shortcut_voice_input">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="me.sinz.sinz"
+            android:targetClass="me.sinz.sinz.InputActivity"/>
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+</shortcuts>

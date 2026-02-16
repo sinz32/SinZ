@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SinZ</string>
+    <string name="shortcut_voice_input">SinZ 음성인식 바로 실행</string>
 </resources>
