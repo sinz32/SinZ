@@ -33,17 +33,16 @@ public class InputActivity extends AppCompatActivity {
     private void procCmd(String input) {
         String[] cmd = input.split(" ");
         String data = input.replaceFirst(cmd[0] + " ", "");
-        if (cmd[0].equals("구글")&&cmd[1].equals("검색")) {
+        if (cmd[0].equals("구글") && cmd[1].equals("검색")) {
             String word = data.replaceFirst(cmd[1] + " ", "");
             Uri uri = Uri.parse("https://www.google.com/search?q=" + word.replace(" ", "+"));
             startActivity(new Intent(Intent.ACTION_VIEW, uri));
-        }
-        else if (cmd[0].equals("네이버")&&cmd[1].equals("검색")) {
+        } else if (cmd[0].equals("네이버") && cmd[1].equals("검색")) {
             String word = data.replaceFirst(cmd[1] + " ", "");
             Uri uri = Uri.parse("https://search.naver.com/search.naver?query=" + word.replace(" ", "+"));
             startActivity(new Intent(Intent.ACTION_VIEW, uri));
         }
-        new Handler().postDelayed(()->finish(), 1000);
+        new Handler().postDelayed(() -> finish(), 1000);
     }
 
     private void voiceInput() {
