@@ -1,0 +1,8 @@
+<voice-interaction-service
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:sessionService="me.sinz.assistant.AssistantSessionService"
+    android:recognitionService="me.sinz.assistant.AssistantService"
+    android:settingsActivity="me.sinz.sinz,MainActivity"
+    android:supportsAssist="true"
+    android:supportsLocalInteraction="true" />

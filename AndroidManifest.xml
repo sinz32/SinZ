@@ -30,6 +30,22 @@
             android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout"
             android:theme="@style/Theme.Transparent"
             android:exported="true" />
+        <service
+            android:name="me.sinz.assistant.AssistantService"
+            android:exported="true"
+            android:permission="android.permission.BIND_VOICE_INTERACTION">
+            <intent-filter>
+                <action android:name="android.service.voice.VoiceInteractionService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.voice_interaction"
+                android:resource="@xml/assistant_voice_input" />
+        </service>
+        <service
+            android:name="me.sinz.assistant.AssistantSessionService"
+            android:exported="true"
+            android:permission="android.permission.BIND_VOICE_INTERACTION">
+        </service>
 
         <activity android:name=".MetroActivity"
             android:resizeableActivity="true"
