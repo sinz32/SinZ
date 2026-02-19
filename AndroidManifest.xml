@@ -35,6 +35,10 @@
             android:resizeableActivity="true"
             android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout"
             android:label="SinZ Metro"/>
+        <activity android:name=".GFriendActivity"
+            android:resizeableActivity="true"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout"
+            android:label="GFRIEND Music"/>
 
     </application>
 

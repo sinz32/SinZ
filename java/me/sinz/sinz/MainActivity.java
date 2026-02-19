@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 //                    startActivity(new Intent(this, TrainCardActivity.class));
                     break;
                 case 3:
-//                    startActivity(new Intent(this, GFriendActivity.class));
+                    startActivity(new Intent(this, GFriendActivity.class));
                     break;
                 case 4:
 
